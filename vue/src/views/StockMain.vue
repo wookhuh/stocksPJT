@@ -1,7 +1,13 @@
 <template>
   <v-app id="keep">
-    <headerNav @main-component="mainComponent"></headerNav>
-    <sideBar @main-component="mainComponent"></sideBar>
+    <headerNav 
+      @main-component="mainComponent" 
+      @toggle-emit="navishow"
+    ></headerNav>
+    <sideBar 
+      @main-component="mainComponent"
+      v-if="yn === true"
+    ></sideBar>
     <div v-if="componentName === 'dashBoard'">
       <dashBoard></dashBoard>    
     </div>
@@ -24,7 +30,8 @@ export default {
   data: () => ({
     drawer: null,
     componentName: 'dashBoard',
-    componentIndex: ''
+    componentIndex: '',
+    yn: null
   }),
   components: {
     headerNav,
@@ -39,6 +46,11 @@ export default {
     mainComponent(index , to){
       this.componentIndex = index;
       this.componentName = to;
+    },
+    navishow(yn){
+      console.log(yn)
+      console.log(typeof yn)
+      this.yn = yn
     }
   },
 };

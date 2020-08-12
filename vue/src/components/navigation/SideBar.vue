@@ -36,6 +36,8 @@
   </v-navigation-drawer>
 </template>
 <script>
+import { eventBus } from "../../main";
+
 export default {
   name: "sideBar",
   data() {
@@ -46,6 +48,16 @@ export default {
         { icon: "chat_bubble", text: "테마주", to: "themedStocks" },
       ],
     };
+  },
+  methods: {
+    // naviToggle(){
+    //   console.log("aaaaaaaaaaaaaaa")
+    //   eventBus.$on("naviToggle", (isToggle) => {
+    //     console.log(isToggle)
+    //     this.drawer = isToggle;
+    //     console.log(this.drawer)
+    //   })
+    // }
   },
 };
 </script>

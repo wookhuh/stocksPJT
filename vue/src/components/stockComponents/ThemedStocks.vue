@@ -15,7 +15,8 @@
       :headers="headers"
       :items="themedStocksData"
       :search="search"
-    ></v-data-table>
+    >
+    </v-data-table>
   </v-card>
 </template>
 
@@ -26,12 +27,11 @@ export default {
     return {
       themedStocksData: [],
       themedCnt: null,
-      gridHeader: ["테마명", "상승", "보합", "하락", "등락률"],
       headers: [
         { text: "테마명", value: "nm" },
-        { text: "상승", value: "rc" },
+        { text: "상승", value: "rc", class: "success--text" },
         { text: "보합", value: "sc" },
-        { text: "하락", value: "fc" },
+        { text: "하락", value: "fc", class: "red--text" },
         { text: "등락률", value: "cr" },
       ],
       search: "",
@@ -46,8 +46,6 @@ export default {
         const totCnt = data.result.totCnt;
         if (data) {
           this.themedCnt = totCnt;
-          //["테마명", "상승", "보합", "하락", "등락률"]
-          //   nm ,     rc ,    sc ,   fc ,     cr
           this.themedStocksData = groupList;
         }
       })
@@ -55,8 +53,25 @@ export default {
         console.log(err);
       });
   },
-  methods: {},
+  methods: {
+    data_class(item) {
+      console.log(item);
+      const per = String(item.cr);
+      if (per.indexOf("-") > -1) {
+        return "success--text";
+      } else {
+        return "red--text";
+      }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+/* .blue {
+  color: aqua;
+}
+.red {
+  color: red;
+} */
+</style>
