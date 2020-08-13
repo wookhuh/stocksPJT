@@ -21,7 +21,7 @@ export default {
     return {
       dialog: false,
       headers: [
-        { text: "테마명", value: "nm" },
+        { text: "종목명", value: "nm" },
         { text: "상승", value: "nv", class: "success--text" },
         { text: "하락", value: "cv", class: "red--text" },
         { text: "등락률", value: "cr" },
