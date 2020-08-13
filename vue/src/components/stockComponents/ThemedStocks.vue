@@ -42,7 +42,7 @@ export default {
         { text: "등락률", value: "cr" },
       ],
       search: "",
-      themeId: null,
+      themeId: [],
     };
   },
   created() {
@@ -69,14 +69,13 @@ export default {
     },
     openModal(value) {
       this.$refs.modal.showModal();
-      this.themeId = value.no;
       const id = value.no;
       this.$http
         .get(`/api/themedDetail/${id}`)
         .then((res) => {
           console.log(res);
           const data = res.data.data.result;
-          if (data) this.themeId = data;
+          if (data) this.themeId = data.itemList;
         })
         .catch((err) => {
           console.log(err);
