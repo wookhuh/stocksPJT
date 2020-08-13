@@ -48,8 +48,6 @@ export default {
       this.componentName = to;
     },
     navishow(yn){
-      console.log(yn)
-      console.log(typeof yn)
       this.yn = yn
     }
   },

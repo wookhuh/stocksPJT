@@ -15,14 +15,32 @@
       :headers="headers"
       :items="themedStocksData"
       :search="search"
+      @click:row="rowClick"
     >
+     <template slot="items" slot-scope="props">
+        <tr @click="props.expanded = !props.expanded">
+          <td>{{ props.item.nm }}</td>
+          <td class="text-xs-right pr-5">{{ props.item.rc }}</td>
+          <td class="text-xs-right pr-5">{{ props.item.sc }}</td>
+          <td class="text-xs-right pr-5">{{ props.item.fc }}</td>
+          <td class="text-xs-right pr-5">{{ props.item.cr }}</td>
+        </tr>
+      </template>
+      <template slot="expand" slot-scope="props">
+        <ThemedDetail v-bind:testName="props.item.nm"></ThemedDetail>
+      </template>
     </v-data-table>
   </v-card>
 </template>
 
 <script>
+import ThemedDetail from './ThemedDetail';
+
 export default {
   name: "themedStocks",
+  components:{
+    ThemedDetail
+  },
   data() {
     return {
       themedStocksData: [],
@@ -55,13 +73,13 @@ export default {
   },
   methods: {
     data_class(item) {
-      console.log(item);
       const per = String(item.cr);
-      if (per.indexOf("-") > -1) {
-        return "success--text";
-      } else {
-        return "red--text";
-      }
+      if (per.indexOf("-") > -1) return "success--text";
+      else return "red--text";
+    },
+    rowClick(value) {
+      console.log("aaaaaaaaaa");
+      console.log(value);
     },
   },
 };

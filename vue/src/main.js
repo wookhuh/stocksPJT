@@ -20,7 +20,6 @@ new Vue({
 export const eventBus = new Vue({
   methods: {
     naviToggle(isToggle){
-      console.log('main.js' , isToggle)
       this.$emit("naviToggle", isToggle)
     }
   },
