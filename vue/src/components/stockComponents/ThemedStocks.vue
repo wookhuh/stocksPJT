@@ -15,31 +15,20 @@
       :headers="headers"
       :items="themedStocksData"
       :search="search"
-      @click:row="rowClick"
+      @click:row="openModal"
     >
-     <template slot="items" slot-scope="props">
-        <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.nm }}</td>
-          <td class="text-xs-right pr-5">{{ props.item.rc }}</td>
-          <td class="text-xs-right pr-5">{{ props.item.sc }}</td>
-          <td class="text-xs-right pr-5">{{ props.item.fc }}</td>
-          <td class="text-xs-right pr-5">{{ props.item.cr }}</td>
-        </tr>
-      </template>
-      <template slot="expand" slot-scope="props">
-        <ThemedDetail v-bind:testName="props.item.nm"></ThemedDetail>
-      </template>
     </v-data-table>
+    <ThemedDetailModal ref="modal" :themeId="themeId"></ThemedDetailModal>
   </v-card>
 </template>
 
 <script>
-import ThemedDetail from './ThemedDetail';
+import ThemedDetailModal from "../modalComponents/ThemedDetailModal";
 
 export default {
   name: "themedStocks",
-  components:{
-    ThemedDetail
+  components: {
+    ThemedDetailModal,
   },
   data() {
     return {
@@ -53,6 +42,7 @@ export default {
         { text: "등락률", value: "cr" },
       ],
       search: "",
+      themeId: null,
     };
   },
   created() {
@@ -77,9 +67,20 @@ export default {
       if (per.indexOf("-") > -1) return "success--text";
       else return "red--text";
     },
-    rowClick(value) {
-      console.log("aaaaaaaaaa");
-      console.log(value);
+    openModal(value) {
+      this.$refs.modal.showModal();
+      this.themeId = value.no;
+      const id = value.no;
+      this.$http
+        .get(`/api/themedDetail/${id}`)
+        .then((res) => {
+          console.log(res);
+          const data = res.data.data.result;
+          if (data) this.themeId = data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import StockMain from '../views/StockMain'
 import themedStocks from "@/components/stockComponents/ThemedStocks";
 import dashBoard from "@/components/stockComponents/DashBoard";
-import themedDetail from "@/components/stockComponents/ThemedDetail";
 
 Vue.use(VueRouter)
 
@@ -22,11 +21,6 @@ const routes = [
     path: '/themedStocks',
     name: 'themedStocks',
     component: themedStocks
-  },
-  {
-    path: '/themedDetail/:id',
-    name: 'themedDetail',
-    component: themedDetail
   },
 ]
 
