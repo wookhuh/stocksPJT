@@ -7,7 +7,7 @@
     </span> -->
     <img
       src="../../assets/logo.png"
-      @click="$emit('main-component', 0, 'dashBoard')"
+      @click="$emit('main-component', 0, 'themedStocks')"
     />
     <!-- <v-text-field solo-inverted flat hide-details label="검색" prepend-inner-icon="search"></v-text-field> -->
 
